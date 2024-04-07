@@ -2,9 +2,10 @@ name: Terraform Drift Detection and Reconciliation
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # Run daily at midnight
+    - cron: '0 0 * * *' # Run daily at midnight
 
 jobs:
+  # Detect drift in the main branch
   detect-drift:
     name: Detect Drift
     runs-on: ubuntu-latest
@@ -23,11 +24,23 @@ jobs:
       - name: Terraform plan
         id: plan
         run: terraform plan -out=tfplan -detailed-exitcode || echo "Plan failed with exit code $?"
-    
-  reconcile-changes:
-    name: Reconcile Changes
-    if: ${{ steps.detect-drift.outputs.exitcode == '2' }}
+
+  # Notify on drift detection (optional)
+  notify-on-drift:
+    name: Notify on Drift (if detected)
     runs-on: ubuntu-latest
+    if: steps.detect-drift.outputs.exitcode == '2'  # Only run if drift detected
+    steps:
+       - name: Send Email Notification
+         run: |
+          echo "Drift detected! Please review the plan file." | mail -s "Terraform Drift Detected" priyankatuladhar14@gmail.com
+
+
+  # Reconcile drift 
+  reconcile-changes:
+    name: Reconcile Changes (Manual Review Recommended)
+    runs-on: ubuntu-latest
+    if: steps.detect-drift.outputs.exitcode == '2'  # Only run if drift detected
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -37,5 +50,8 @@ jobs:
         with:
           terraform_version: 1.5.0
 
-      - name: Terraform apply
-        run: terraform apply -auto-approve tfplan
+      - name: Terraform plan with verbose output
+        run: terraform plan -out=tfplan
+
+      - name: Apply changes 
+        run: terraform apply -auto-approve
