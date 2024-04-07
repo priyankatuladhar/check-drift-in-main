@@ -107,7 +107,7 @@ jobs:
 
       - name: Upload S3
         run: |
-          aws s3 cp frontend/dist s3://priyanka-git-bucket-04072024-${{ needs.resolve-environment.outputs.env_name }} --recursive
+          aws s3 /dist s3://pri-test-bucket-ops-${{ needs.resolve-environment.outputs.env_name }} --recursive
           
       - name: Setup semver bash
         run: |
