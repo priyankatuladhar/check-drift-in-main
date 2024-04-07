@@ -37,3 +37,10 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "tf_backend_bucket
     }
   }
 }
+output "example_bucket_arn" {
+  value = aws_s3_bucket.tf_backend_bucket.arn
+}
+output "bucket_id" {
+  description = "The ID of the S3 bucket"
+  value       = aws_s3_bucket.tf_backend_bucket.id
+}
