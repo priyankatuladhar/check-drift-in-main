@@ -4,7 +4,7 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket         = "priyanka-git-bucket-04072024" # Use the same bucket name here
+    bucket         = "priyanka-git-bucket-04072024"
     key            = "terraform.tfstate"
     region         = "us-east-1"
     dynamodb_table = "terraform_state_04072024"
@@ -12,7 +12,7 @@ terraform {
 }
 
 resource "aws_s3_bucket" "tf_backend_bucket" {
-  bucket = "priyanka-git-bucket-04072024" # Use the same bucket name here
+  bucket = "priyanka-git-bucket-04072024"
   tags   = var.bucket_tags
 }
 
