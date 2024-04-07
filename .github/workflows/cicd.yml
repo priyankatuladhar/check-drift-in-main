@@ -107,7 +107,7 @@ jobs:
 
       - name: Upload S3
         run: |
-          aws s3 /dist s3://pri-test-bucket-ops-${{ needs.resolve-environment.outputs.env_name }} --recursive
+          aws s3 /dist s3://pri-test-bucket-ops-0707-${{ needs.resolve-environment.outputs.env_name }} --recursive
           
       - name: Setup semver bash
         run: |
