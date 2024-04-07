@@ -13,7 +13,7 @@ terraform {
 
 resource "aws_s3_bucket" "tf_backend_bucket" {
   bucket = var.bucket_name
-  tags = var.bucket_tags
+  tags   = var.bucket_tags
 }
 
 resource "aws_s3_bucket_versioning" "tf_backend_bucket_versioning" {
