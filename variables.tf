@@ -9,7 +9,12 @@ variable "bucket_acl" {
   type        = string
   default     = "private"
 }
-
+variable "region" {
+  default = "us-east-1"
+}
+variable "bucket_name" {
+  default = "priyanka-git-bucket-04072024"
+}
 variable "bucket_tags" {
   description = "Tags for the S3 bucket"
   type        = map(string)
