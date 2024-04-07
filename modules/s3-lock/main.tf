@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "pri-terraform-state" {
-  bucket = "pri-terraform-state"
+  bucket = "pri-terraform-state-0707"
   # Tags
   tags = merge(
     var.tags,
