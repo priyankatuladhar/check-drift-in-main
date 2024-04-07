@@ -25,7 +25,9 @@ resource "aws_s3_bucket_versioning" "pri-terraform-state_versioning" {
 }
 
 resource "aws_s3_bucket_object_lock_configuration" "pri-terraform-state_object_lock" {
-  depends_on          = [aws_s3_bucket.pri-terraform-state]
+  depends_on          = [aws_s3_bucket.pri-terraform-state,
+                         aws_s3_bucket_versioning.pri-terraform-state_versioning
+                        ]
   bucket              = aws_s3_bucket.pri-terraform-state.id
   object_lock_enabled = "Enabled"
 }
