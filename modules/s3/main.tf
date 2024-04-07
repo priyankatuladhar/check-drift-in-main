@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "default" {
-  bucket = "pri-test-bucket-ops-1-new"
+  bucket = "pri-test-bucket-ops-1-new-01"
 
   # Tags
   tags = merge(
