@@ -4,7 +4,7 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket         = "priyanka-git-bucket-04072024"
+    bucket         = var.bucket_name  # Using var.bucket_name here
     key            = "terraform.tfstate"
     region         = "us-east-1"
     dynamodb_table = "terraform_state_04072024"
@@ -12,7 +12,7 @@ terraform {
 }
 
 resource "aws_s3_bucket" "tf_backend_bucket" {
-  bucket = var.bucket_name
+  bucket = var.bucket_name  # Using var.bucket_name here
   tags   = var.bucket_tags
 }
 
@@ -37,9 +37,11 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "tf_backend_bucket
     }
   }
 }
+
 output "example_bucket_arn" {
   value = aws_s3_bucket.tf_backend_bucket.arn
 }
+
 output "bucket_id" {
   description = "The ID of the S3 bucket"
   value       = aws_s3_bucket.tf_backend_bucket.id
