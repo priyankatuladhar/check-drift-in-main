@@ -85,7 +85,7 @@ jobs:
           
 
       - name: Terraform apply
-       
+        if: github.event.pull_request.merged || github.event_name == 'workflow_dispatch'
         run: terraform apply --auto-approve
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
