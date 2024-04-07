@@ -18,7 +18,7 @@ variable "bucket_name" {
 variable "bucket_tags" {
   description = "Tags for the S3 bucket"
   type        = map(string)
-  default     = {
+  default = {
     Name        = "priyanka buckte"
     Environment = "Development"
     Creator     = "priyankatuladharmail@gmail.com"
